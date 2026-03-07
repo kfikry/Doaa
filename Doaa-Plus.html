@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاذكار والدعاء | Adhkar & Du'a</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #ffd700;
+            --deep-gold: #b8860b;
+            --soft-gold: #f9e076;
+            --islamic-green: #0b4f3a;
+            --light-green: #1e6b50;
+            --cream: #fef9e7;
+            --elegant-brown: #5d3a1a;
+            --night-blue: #0a2342;
+            --transparent-gold: rgba(255, 215, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Amiri', 'Scheherazade', 'Traditional Arabic', serif;
+            background: linear-gradient(145deg, #0a3827 0%, #1e5b40 50%, #0f4631 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #2c3e50;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M50,10 L60,30 L50,50 L40,30 L50,10" fill="%23ffd700"/><circle cx="50" cy="60" r="10" fill="%23ffd700"/></svg>'),
+                repeating-linear-gradient(45deg, transparent 0px, transparent 25px, var(--transparent-gold) 25px, var(--transparent-gold) 50px);
+            background-size: 100px 100px, 70px 70px;
+            animation: patternMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 200px 200px, 70px 70px; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header with animation */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .crescent {
+            font-size: 4rem;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            animation: rotateGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes rotateGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); transform: scale(1.05); }
+        }
+
+        .header h1 {
+            color: var(--primary-gold);
+            font-size: 4rem;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.5),
+                2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            line-height: 1.3;
+        }
+
+        .header h1 span {
+            display: block;
+            font-size: 2rem;
+            color: var(--soft-gold);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .basmallah-container {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.2));
+            padding: 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .basmallah {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Search and filter bar */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 45px 15px 20px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 1rem;
+            font-family: 'Amiri', serif;
+            color: #1e3c2f;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            transform: scale(1.02);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--islamic-green);
+            font-size: 1.2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            color: white;
+            font-family: 'Amiri', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gold);
+            color: #0a3827;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Stats counter */
+        .stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .stat-number {
+            color: var(--primary-gold);
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-left: 5px;
+        }
+
+        /* Duas grid */
+        .dua-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+            perspective: 1000px;
+        }
+
+        .dua-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 215, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: cardAppear 0.5s ease-out;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .dua-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 2px var(--primary-gold);
+        }
+
+        .dua-card::before {
+            content: '﷽';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 215, 0, 0.3);
+            font-family: 'Amiri', serif;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dua-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-gold);
+            color: #0a3827;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+            z-index: 2;
+        }
+
+        .dua-text {
+            font-size: 1.5rem;
+            line-height: 2.2;
+            color: #1e3c2f;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .dua-text p {
+            margin-bottom: 15px;
+        }
+
+        .dua-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Audio button */
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .audio-btn {
+            background: var(--islamic-green);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-gold);
+            font-size: 1rem;
+        }
+
+        .audio-btn:hover {
+            background: var(--primary-gold);
+            color: var(--islamic-green);
+            transform: scale(1.1);
+        }
+
+        .copy-btn {
+            background: var(--elegant-brown);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Amiri', serif;
+            font-size: 0.9rem;
+            border: 1px solid var(--primary-gold);
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-gold);
+            color: var(--elegant-brown);
+        }
+
+        /* Counter for repeated duas */
+        .counter-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .counter-btn {
+            background: var(--transparent-gold);
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .counter-btn:hover {
+            background: var(--primary-gold);
+            color: var(--islamic-green);
+        }
+
+        .counter-display {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            color: #ecf0f1;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+            border-radius: 60px 60px 0 0;
+            backdrop-filter: blur(5px);
+            border-top: 2px solid var(--primary-gold);
+        }
+
+        .footer .arabic {
+            font-size: 1.8rem;
+            color: var(--primary-gold);
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .share-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .share-btn:hover {
+            background: var(--primary-gold);
+            color: var(--islamic-green);
+            transform: translateY(-5px);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .dua-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dua-text {
+                font-size: 1.3rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .basmallah {
+                font-size: 1.8rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Night mode toggle */
+        .night-mode-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--islamic-green);
+            color: var(--primary-gold);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        .night-mode-toggle:hover {
+            transform: scale(1.1);
+            background: var(--primary-gold);
+            color: var(--islamic-green);
+        }
+
+        /* Night mode styles */
+        body.night-mode {
+            background: linear-gradient(145deg, #0a0f1e 0%, #1a1f2e 100%);
+        }
+
+        body.night-mode .dua-card {
+            background: rgba(30, 30, 40, 0.98);
+            color: #e0e0e0;
+        }
+
+        body.night-mode .dua-text {
+            color: #ffd700;
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,215,0,0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-gold);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--islamic-green);
+            color: var(--primary-gold);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 2px solid var(--primary-gold);
+            z-index: 1000;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+            to {
+                top: 20px;
+                opacity: 1;
+            }
+        }
+
+        /* Progress bar */
+        .progress-container {
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-gold);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+    
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Night mode toggle -->
+    <div class="night-mode-toggle tooltip" onclick="toggleNightMode()">
+        <i class="fas fa-moon"></i>
+        <span class="tooltiptext">الوضع الليلي</span>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="crescent">☪</div>
+            <h1>الادعيه والذكر <span>Adhkar & Du'a</span></h1>
+            <div class="basmallah-container">
+                <div class="basmallah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث في الأدعية...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterDuas('all')">الكل</button>
+                <button class="filter-btn" onclick="filterDuas('short')">قصير</button>
+                <button class="filter-btn" onclick="filterDuas('long')">طويل</button>
+                <button class="filter-btn" onclick="filterDuas('special')">مميز</button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <i class="fas fa-book-open"></i>
+                <span><span class="stat-number" id="totalDuas">15</span> دعاء</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-clock"></i>
+                <span>آخر تحديث: <span id="lastUpdated"></span></span>
+            </div>
+        </div>
+
+        <div class="dua-grid" id="duaGrid">
+            <!-- Duas will be populated by JavaScript -->
+        </div>
+
+        <div class="footer">
+            <p>الدعاء هو العبادة</p>
+            <p class="arabic">"وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ"</p>
+            <p style="margin-top: 20px; font-size: 1rem;">﴿غافر: 60﴾</p>
+            
+            <div class="share-buttons">
+                <button class="share-btn tooltip" onclick="shareOnWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="tooltiptext">مشاركة</span>
+                </button>
+                <button class="share-btn tooltip" onclick="copyAllDuas()">
+                    <i class="fas fa-copy"></i>
+                    <span class="tooltiptext">نسخ الكل</span>
+                </button>
+                <button class="share-btn tooltip" onclick="printPage()">
+                    <i class="fas fa-print"></i>
+                    <span class="tooltiptext">طباعة</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success message container -->
+    <div id="successMessage" class="success-message" style="display: none;"></div>
+
+    <script>
+        // Dua data
+        const duas = [
+            {
+                id: 1,
+                text: "رَبِّي إِنِّي لِمَآ أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
+                length: "short",
+                special: false,
+                repeat: 1,
+                category: "general"
+            },
+            {
+                id: 2,
+                text: "اللهم افتح عليَّ فتوح العارفين، ووفِّقني توفيق الصالحين، وانفعني بما علَّمتني، وعلِّمني ما ينفعني، وزِدني علمًا، ووسِّع عليَّ في رزقي، وبارك لي فيه، واجعل عملي خالصًا لوجهك الكريم.",
+                length: "medium",
+                special: false,
+                repeat: 1,
+                category: "knowledge"
+            },
+            {
+                id: 3,
+                text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنِّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ، لَا إِلَهَ إِلَّا أَنْتَ، الْأَحَدُ الصَّمَدُ، الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ.",
+                length: "medium",
+                special: true,
+                repeat: 1,
+                category: "tawheed"
+            },
+            {
+                id: 4,
+                text: "أعوذ بالله العظيم، وبوجهه الكريم، وسلطانه القديم، من الشيطان الرجيم.",
+                length: "short",
+                special: false,
+                repeat: 1,
+                category: "protection"
+            },
+            {
+                id: 5,
+                text: "اللهم إنا نسألك سداد الاختيار، وجلاء البصيرة، ورجاحة العقل، وثبات المثابرة. هذِّبنا بعطاياك الرحيمة، وأغنِنا بنعمك الجسيمة. واجعل ذكرنا بين الأنام عاليًا، ومقامنا في القلوب غاليًا. واجعل في مضينا أثرًا يُسرّ، وخلطةً لا تضرّ. صبَّ علينا حبك يا الله صبًّا، وازهر مكدرات الحياة عبقًا بالمسرّات. وأمطر أرواحنا بأنهار السلوى، واسقنا روح الأمن واليقين. ولا تجعل قلوبنا تموت قسوةً، واجعل جناننا رفرفةً تظلّلها سماوات العلا.",
+                length: "long",
+                special: true,
+                repeat: 1,
+                category: "comprehensive"
+            },
+            {
+                id: 6,
+                text: "قلها ثلاث مرات: اللهم إني مقبل على أيام تحتاج إلى توفيقك، فاجعل أولها تساهيل، وآخرها فرحًا.",
+                length: "medium",
+                special: true,
+                repeat: 3,
+                category: "morning"
+            },
+            {
+                id: 7,
+                text: "اللهم طهر قلبي من كل دنس، وأحسن فرجي، واستغفر لك، واهدني إلى طريقك المستقيم واجعلني من عبادك الصالحين",
+                length: "short",
+                special: false,
+                repeat: 1,
+                category: "forgiveness"
+            },
+            {
+                id: 8,
+                text: "اللهم اجعلني في مقامٍ لا يُطال، وفي حظٍّ لا يُنافس، وفي نصيبٍ إذا ذُكر اسمي قيل: هذا فضلُ الله يؤتيه من يشاء. اللهم ارفع قدري رفعًا يليق بكرمك وعظمتك. واجعل لي عزًّا لا يُكسر، وهيبةً تُشعَر، ونورًا خفيًّا يسبقني حيثما حللت. واجعل لي قبولًا يسبق الكلام، وحضورًا يملأ المكان، وأيامًا مصونةً بكرمك يا أكرم الأكرمين. واختر لي يا رب ما يرفعني في الدنيا والآخرة قدرًا ومكانةً في القلوب. آمين، آمين، آمين.",
+                length: "long",
+                special: true,
+                repeat: 1,
+                category: "elevation"
+            },
+            {
+                id: 9,
+                text: "لا إله إلا الله، والله أكبر. لا إله إلا الله وحده. لا إله إلا الله وحده لا شريك له. لا إله إلا الله له الملك وله الحمد. لا إله إلا الله ولا حول ولا قوة إلا بالله",
+                length: "medium",
+                special: true,
+                repeat: 1,
+                category: "tahlil"
+            },
+            {
+                id: 10,
+                text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ، أَسْتَغْفِرُ اللَّهَ.",
+                length: "short",
+                special: false,
+                repeat: 3,
+                category: "tasbih"
+            },
+            {
+                id: 11,
+                text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الثَّبَاتَ فِي الأَمْرِ، وَالْعَزِيمَةَ عَلَى الرُّشْدِ، وَأَسْأَلُكَ شُكْرَ نِعْمَتِكَ، وَحُسْنَ عِبَادَتِكَ. اللَّهُمَّ إِنِّي أَسْأَلُكَ قَلْبًا سَلِيمًا، وَلِسَانًا صَادِقًا. وَأَسْأَلُكَ مِنْ خَيْرِ مَا تَعْلَمُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا تَعْلَمُ، وَأَسْتَغْفِرُكَ لِمَا تَعْلَمُ، إِنَّكَ أَنْتَ عَلَّامُ الْغُيُوبِ",
+                length: "medium",
+                special: false,
+                repeat: 1,
+                category: "guidance"
+            },
+            {
+                id: 12,
+                text: "اللهم باعد بيني وبين يوم لا أستطيع تحمله، وباعد بيني وبين قدر يصعب علي تقبله، واقرب إلي فرحة قلبي يا رب العالمين. اللهم اجعلني في كنف عنايتك، فلا يضرني بشر ولا يحزنني قدر",
+                length: "medium",
+                special: false,
+                repeat: 1,
+                category: "protection"
+            },
+            {
+                id: 13,
+                text: "للهم هب لي ملكًا يليق بكرمك، وهب لي وجاهة ترفع بها قدري بين عبادك، وهب لي مالًا مباركًا طيبًا واسعًا لا يبعدني عنك، وهب لي عونًا لا ينقطع، وقوة لا تضعف، وسعادة تملأ قلبي وترضي روحي. اللهم هب لي من كل ما تمنيت، وفوق ما تمنيت، يا رب، سخر لي الأسباب وقلوب العباد، وسخر لي الأماكن والأزمان، ولا تتركني تائهاً لا أعرف لنفسي وجهة ولا طريقًا ولا معينة، واجعلني في كنفك محاطًا برحمتك، مسدد الخطى بك لا أضل ولا أضعف. اللهم آمين، والصلاة والسلام على نبينا محمد",
+                length: "long",
+                special: true,
+                repeat: 1,
+                category: "provision"
+            },
+            {
+                id: 14,
+                text: "اللهم إني أستودعك ما أحب، وأستودعك ديني وإيماني وعقلي وصحتي ومالي، فاحفظه لي بعينك التي لا تنام، واجعله في أمانك ورعايتك يا رب العالمين.",
+                length: "medium",
+                special: false,
+                repeat: 1,
+                category: "protection"
+            },
+            {
+                id: 15,
+                text: "اللهم إني أسألك غنى لا يُطلق فيه غنى، يغنيني بك عن من سواك. اللهم لا تجعل الدنيا أكبر همي، ولا مبلغ علمي، ولا تسلط علي بذنبي من لا يخافك ولا يرحمني. اللهم إني أسألك زوجة صالحة ذات وجه القمر، تعينني على ديني، وتحفظ عليها دينها، وأنجب منها طفلاً تحفظ عليه دينه، وتتكفل لي برزقه يا رب العالمين. اللهم إني أستودعك ديني وأهلي وخواتيم عملي. اللهم آمين.",
+                length: "long",
+                special: true,
+                repeat: 1,
+                category: "family"
+            },
+            {
+                id: 16,
+                text: "اللهم صلِّ صلاةً كاملةً وسلّم سلامًا تامًّا على نبينا محمد، الذي تنحل به العقد، وتنفرج به الكروب، وتقضى به الحوائج، وتنال به الرغائب، ويحسن به الخواتيم، ويستسقى الغمام بوجهه الكريم، وعلى آله وصحبه حق قدره ومقداره العظيم.",
+                length: "long",
+                special: true,
+                repeat: 1,
+                category: "salawat"
+            }
+        ];
+
+        // State management
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let counters = {};
+
+        // Initialize counters
+        duas.forEach(dua => {
+            counters[dua.id] = 0;
+        });
+
+        // Display last updated time
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('ar-SA');
+
+        // Render duas
+        function renderDuas() {
+            const grid = document.getElementById('duaGrid');
+            grid.innerHTML = '';
+            
+            const filteredDuas = filterDuasBySearchAndCategory();
+            
+            filteredDuas.forEach(dua => {
+                const card = createDuaCard(dua);
+                grid.appendChild(card);
+            });
+
+            updateStats();
+        }
+
+        function createDuaCard(dua) {
+            const card = document.createElement('div');
+            card.className = `dua-card ${dua.special ? 'special-dua' : ''}`;
+            card.setAttribute('data-id', dua.id);
+            card.setAttribute('data-length', dua.length);
+            card.setAttribute('data-category', dua.category);
+
+            let badgeHtml = '';
+            if (dua.special) {
+                badgeHtml = '<span class="card-badge">✨ دعاء مميز</span>';
+            }
+
+            let counterHtml = '';
+            if (dua.repeat > 1) {
+                counterHtml = `
+                    <div class="counter-container">
+                        <button class="counter-btn" onclick="decrementCounter(${dua.id})">-</button>
+                        <span class="counter-display" id="counter-${dua.id}">${counters[dua.id]}</span>
+                        <button class="counter-btn" onclick="incrementCounter(${dua.id})">+</button>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                ${badgeHtml}
+                <div class="dua-text">
+                    <p>${dua.text.replace(/\n/g, '<br>')}</p>
+                </div>
+                ${counterHtml}
+                <div class="audio-controls">
+                    <button class="audio-btn tooltip" onclick="speakDua(${dua.id})">
+                        <i class="fas fa-play"></i>
+                        <span class="tooltiptext">استماع</span>
+                    </button>
+                    <button class="audio-btn tooltip" onclick="copyDua(${dua.id})">
+                        <i class="fas fa-copy"></i>
+                        <span class="tooltiptext">نسخ</span>
+                    </button>
+                    <button class="copy-btn tooltip" onclick="addToFavorites(${dua.id})">
+                        <i class="fas fa-heart"></i>
+                        <span class="tooltiptext">إلى المفضلة</span>
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function filterDuasBySearchAndCategory() {
+            return duas.filter(dua => {
+                const matchesSearch = dua.text.includes(currentSearch) || 
+                                     currentSearch === '';
+                
+                let matchesCategory = true;
+                if (currentFilter === 'short') {
+                    matchesCategory = dua.length === 'short';
+                } else if (currentFilter === 'long') {
+                    matchesCategory = dua.length === 'long';
+                } else if (currentFilter === 'special') {
+                    matchesCategory = dua.special === true;
+                }
+                
+                return matchesSearch && matchesCategory;
+            });
+        }
+
+        function filterDuas(filter) {
+            currentFilter = filter;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderDuas();
+        }
+
+        function updateStats() {
+            document.getElementById('totalDuas').textContent = duas.length;
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderDuas();
+        });
+
+        // Counter functions
+        function incrementCounter(id) {
+            counters[id] = (counters[id] || 0) + 1;
+            const counterElement = document.getElementById(`counter-${id}`);
+            if (counterElement) {
+                counterElement.textContent = counters[id];
+            }
+        }
+
+        function decrementCounter(id) {
+            if (counters[id] > 0) {
+                counters[id]--;
+                const counterElement = document.getElementById(`counter-${id}`);
+                if (counterElement) {
+                    counterElement.textContent = counters[id];
+                }
+            }
+        }
+
+        // Speech synthesis
+        function speakDua(id) {
+            const dua = duas.find(d => d.id === id);
+            if (!dua) return;
+
+            // Stop any ongoing speech
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(dua.text);
+            utterance.lang = 'ar-SA';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            
+            // Try to get an Arabic voice
+            const voices = window.speechSynthesis.getVoices();
+            const arabicVoice = voices.find(voice => voice.lang.includes('ar'));
+            if (arabicVoice) {
+                utterance.voice = arabicVoice;
+            }
+
+            window.speechSynthesis.speak(utterance);
+            
+            showSuccessMessage('جاري تشغيل الدعاء...');
+        }
+
+        // Copy functions
+        function copyDua(id) {
+            const dua = duas.find(d => d.id === id);
+            if (!dua) return;
+
+            navigator.clipboard.writeText(dua.text).then(() => {
+                showSuccessMessage('تم نسخ الدعاء!');
+            }).catch(err => {
+                showErrorMessage('فشل النسخ');
+            });
+        }
+
+        function copyAllDuas() {
+            const allText = duas.map(d => d.text).join('\n\n──────────\n\n');
+            
+            navigator.clipboard.writeText(allText).then(() => {
+                showSuccessMessage('تم نسخ جميع الأدعية!');
+            }).catch(err => {
+                showErrorMessage('فشل النسخ');
+            });
+        }
+
+        // Favorites (using localStorage)
+        function addToFavorites(id) {
+            let favorites = JSON.parse(localStorage.getItem('favoriteDuas') || '[]');
+            
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(fav => fav !== id);
+                showSuccessMessage('تم الإزالة من المفضلة');
+            } else {
+                favorites.push(id);
+                showSuccessMessage('تم الإضافة إلى المفضلة');
+            }
+            
+            localStorage.setItem('favoriteDuas', JSON.stringify(favorites));
+        }
+
+        // Night mode
+        function toggleNightMode() {
+            document.body.classList.toggle('night-mode');
+            const icon = document.querySelector('.night-mode-toggle i');
+            
+            if (document.body.classList.contains('night-mode')) {
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('nightMode', 'enabled');
+            } else {
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('nightMode', 'disabled');
+            }
+        }
+
+        // Check for saved night mode preference
+        if (localStorage.getItem('nightMode') === 'enabled') {
+            document.body.classList.add('night-mode');
+            document.querySelector('.night-mode-toggle i').className = 'fas fa-sun';
+        }
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Success/Error messages
+        function showSuccessMessage(message) {
+            const msgDiv = document.getElementById('successMessage');
+            msgDiv.style.display = 'block';
+            msgDiv.textContent = message;
+            msgDiv.style.background = '#0b4f3a';
+            
+            setTimeout(() => {
+                msgDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        function showErrorMessage(message) {
+            const msgDiv = document.getElementById('successMessage');
+            msgDiv.style.display = 'block';
+            msgDiv.textContent = message;
+            msgDiv.style.background = '#8b0000';
+            
+            setTimeout(() => {
+                msgDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        // Share functions
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent('مجموعة من الأدعية المباركة');
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function printPage() {
+            window.print();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDuas();
+            
+            // Load voices for speech synthesis
+            window.speechSynthesis.getVoices();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+    </script>
+</body>
+</html>
