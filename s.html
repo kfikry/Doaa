@@ -28,6 +28,8 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            /* Prevent blue tap highlight on mobile */
+            -webkit-tap-highlight-color: transparent;
         }
 
         .mobile-wrap {
@@ -78,6 +80,7 @@
             padding: 0.2rem 0.5rem;
             border-radius: 12px;
             -webkit-touch-callout: none;
+            cursor: pointer; /* Shows it's clickable */
         }
 
         @media (max-width: 420px) {
@@ -164,6 +167,7 @@
             font-size: clamp(1.1rem, 4vw, 1.4rem);
         }
 
+        /* The active color state */
         .dua-text.highlight-touch {
             background-color: #f8e5cf;
             color: #0b4a3f;
@@ -224,6 +228,7 @@
             border-radius: 12px;
             transition: background 0.2s ease, color 0.2s ease;
             -webkit-touch-callout: none;
+            cursor: pointer;
         }
         
         /* Alternating alignment for poetry */
@@ -480,30 +485,22 @@
             });
         }
 
-        // تفاعل اللمس لكل نصوص dua-text و poetry-line
+        // تفاعل النقر (Toggle) لكل نصوص dua-text و poetry-line
         const allTexts = document.querySelectorAll('.dua-text, .poetry-line');
+        
         allTexts.forEach(el => {
-            // إضافة اللون عند لمس الشاشة
-            el.addEventListener('touchstart', function() { 
-                this.classList.add('highlight-touch'); 
-            }, { passive: true });
-            
-            // إزالة اللون عند رفع الإصبع
-            el.addEventListener('touchend', function() { 
-                this.classList.remove('highlight-touch'); 
-            });
-            
-            // إزالة اللون إذا تم سحب الإصبع (التمرير)
-            el.addEventListener('touchcancel', function() { 
-                this.classList.remove('highlight-touch'); 
-            });
-            
-            // دعم الماوس للكمبيوتر
-            el.addEventListener('mouseenter', function() { 
-                this.classList.add('highlight-touch'); 
-            });
-            el.addEventListener('mouseleave', function() { 
-                this.classList.remove('highlight-touch'); 
+            el.addEventListener('click', function() {
+                // Check if this block is already highlighted
+                const isCurrentlyHighlighted = this.classList.contains('highlight-touch');
+                
+                // First, remove highlight from ALL blocks
+                allTexts.forEach(item => item.classList.remove('highlight-touch'));
+                
+                // If it was NOT highlighted before clicking, highlight it now.
+                // If it WAS highlighted, this leaves it unhighlighted (toggling it off).
+                if (!isCurrentlyHighlighted) {
+                    this.classList.add('highlight-touch');
+                }
             });
         });
 
