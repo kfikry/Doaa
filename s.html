@@ -275,23 +275,26 @@
             color: #5c462b;
         }
 
+        /* ==================== تنسيق القصيدة ==================== */
         .poetry-line {
             font-size: calc(clamp(1.15rem, 4.2vw, 1.5rem) * var(--text-scale));
             margin: 0.4rem 0;
-            padding: 0.4rem;
+            padding: 0.4rem 10%; /* مسافة من الجوانب */
             border-radius: 12px;
             transition: background-color 0.2s ease, color 0.2s ease;
             cursor: pointer;
             touch-action: manipulation;
-            line-height: 1.7;
-            text-align: center;
+            line-height: 1.8;
             width: 100%;
             max-width: 100%;
         }
         
-        .poetry-line:nth-child(odd),
+        /* الشطر الفردي يمين، والزوجي شمال */
+        .poetry-line:nth-child(odd) {
+            text-align: right;
+        }
         .poetry-line:nth-child(even) {
-            text-align: center;
+            text-align: left;
         }
 
         @media (max-width: 360px) {
